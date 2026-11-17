@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Proyectos — bloque de la portada (page/index.blade.php)
+   Mosaico de obras. Cada pieza nombra la obra y los productos que se usaron:
+   es la prueba real de la marca, no una galería anónima.
+   Los títulos heredan 'HandelGothic TL' de main.css; aquí solo tamaño y ritmo.
+   ========================================================================== */
+
+.pj {
+    --pj-navy: #071a3f;
+    --pj-blue: var(--blue);
+    --pj-red: var(--red);
+    --pj-gap: clamp(0.6rem, 1.2vw, 1rem);
+
+    padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.pj-lede {
+    max-width: 62ch;
+    margin: -0.5rem auto clamp(1.5rem, 3vw, 2.25rem);
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--grey);
+}
+
+/* ---------- Mosaico ------------------------------------------------------ */
+
+.pj-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: clamp(9rem, 13vw, 12.5rem);
+    gap: var(--pj-gap);
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+/* La obra principal ocupa un cuadrante: ancla la composición */
+.pj-tile--lead {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* ---------- Pieza -------------------------------------------------------- */
+
+.pj-tile {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--pj-navy);
+    color: #fff;
+    text-decoration: none;
+    isolation: isolate;
+}
+
+.pj-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+/* Velo en azul de marca, no en negro: mantiene la temperatura del logo */
+.pj-tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top,
+            rgba(7, 26, 63, 0.92) 0%,
+            rgba(7, 26, 63, 0.62) 34%,
+            rgba(7, 26, 63, 0.08) 72%,
+            rgba(7, 26, 63, 0) 100%);
+    transition: opacity 0.4s ease;
+}
+
+/* Zócalo: misma firma que las tarjetas de noticias, en blanco porque el azul
+   se pierde contra el velo azul de la foto */
+.pj-tile::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 3;
+    height: 5px;
+    background: linear-gradient(to right, #fff 0 72%, var(--pj-red) 72% 100%);
+}
+
+.pj-tile:hover img,
+.pj-tile:focus-visible img {
+    transform: scale(1.06);
+}
+
+.pj-tile:focus-visible {
+    outline: 3px solid var(--pj-red);
+    outline-offset: 2px;
+}
+
+.pj-tile-body {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding: clamp(0.75rem, 1.4vw, 1.25rem);
+    padding-bottom: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+.pj-tile-name {
+    margin: 0;
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+
+.pj-tile--lead .pj-tile-name {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.pj-tile-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pj-tile-products li {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    font-family: var(--font-family);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e6ecf7;
+    white-space: nowrap;
+}
+
+.pj-tile--lead .pj-tile-products li {
+    font-size: 0.72rem;
+    padding: 0.28rem 0.7rem;
+}
+
+/* ---------- Enlace a la sección completa --------------------------------- */
+
+.pj-all-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.pj-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1.6rem;
+    border: 1px solid var(--pj-blue);
+    border-radius: 999px;
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pj-blue);
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.pj-all:hover,
+.pj-all:focus-visible {
+    background: var(--pj-blue);
+    border-color: var(--pj-blue);
+    color: #fff;
+}
+
+.pj-all i {
+    transition: transform 0.25s ease;
+}
+
+.pj-all:hover i {
+    transform: translateX(4px);
+}
+
+/* Etiqueta solo para lectores de pantalla */
+.pj-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------- Adaptación --------------------------------------------------- */
+
+@media (max-width: 992px) {
+    .pj-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: clamp(9rem, 22vw, 13rem);
+    }
+
+    /* En dos columnas la principal ya destaca a lo ancho: no necesita alto doble */
+    .pj-tile--lead {
+        grid-column: 1 / -1;
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Alto suficiente para un nombre de dos líneas más sus productos */
+    .pj-grid {
+        grid-auto-rows: 11.5rem;
+    }
+
+    .pj-tile-name {
+        font-size: 0.9rem;
+    }
+
+    .pj-tile-products li {
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pj-tile img,
+    .pj-tile::before,
+    .pj-all i {
+        transition: none;
+    }
+
+    .pj-tile:hover img {
+        transform: none;
+    }
+}

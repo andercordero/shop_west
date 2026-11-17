@@ -1,0 +1,1232 @@
+/* ==========================================================================
+   Noticias — listado (/noticias)
+   Paleta y tipografía derivadas del banner de fachada de Productos Occidente:
+   panel azul + titular condensado en caps + regla bajo la última palabra,
+   y el zócalo azul/rojo de la tienda reutilizado como firma de las tarjetas.
+   ========================================================================== */
+
+.nw {
+    --nw-navy: #071a3f;
+    --nw-blue: #0c2f73;
+    --nw-blue-2: #275a9d;
+    --nw-red: #ff0033;
+    --nw-paper: #f2f4f8;
+    --nw-card: #ffffff;
+    --nw-ink: #101828;
+    --nw-mute: #667085;
+    --nw-line: #dfe4ec;
+
+    --nw-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --nw-body: 'Inter', 'Roboto', sans-serif;
+    --nw-util: 'Barlow', 'Roboto', sans-serif;
+
+    background: var(--nw-paper);
+    color: var(--nw-ink);
+    font-family: var(--nw-body);
+}
+
+/* ---------- Hero: panel navy + banner de fachada ------------------------- */
+
+.nw-hero {
+    background: var(--nw-navy);
+    padding: clamp(7rem, 11vw, 9.5rem) 0 clamp(2rem, 4vw, 3.5rem);
+}
+
+.nw-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.85fr) minmax(0, 2fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+}
+
+.nw-masthead {
+    color: #fff;
+}
+
+.nw-eyebrow {
+    font-family: var(--nw-util);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8fb0e8;
+    margin: 0 0 0.75rem;
+}
+
+.nw-title {
+    font-family: var(--nw-display);
+    font-weight: 800;
+    font-size: clamp(2.9rem, 6vw, 4.6rem);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #fff;
+}
+
+/* La regla bajo el titular repite el subrayado del banner */
+.nw-rule {
+    display: block;
+    width: 88px;
+    height: 6px;
+    margin: 1.1rem 0 1.25rem;
+    background: linear-gradient(to right, #fff 0 62%, var(--nw-red) 62% 100%);
+}
+
+.nw-lede {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #c3d2ea;
+    margin: 0;
+    max-width: 34ch;
+}
+
+.nw-hero-figure {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2.6 / 1;
+    overflow: hidden;
+    background: #0c2f73;
+}
+
+.nw-hero-figure img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ---------- Riel de categorías ------------------------------------------ */
+
+.nw-rail {
+    background: #fff;
+    border-bottom: 1px solid var(--nw-line);
+    box-shadow: 0 1px 0 rgba(7, 26, 63, 0.04);
+}
+
+.nw-chips-rail {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow-x: auto;
+    padding: 0.9rem 0;
+    scrollbar-width: none;
+}
+
+.nw-chips-rail::-webkit-scrollbar {
+    display: none;
+}
+
+.nw-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nw-rail-label {
+    font-family: var(--nw-util);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+    white-space: nowrap;
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+    border-right: 1px solid var(--nw-line);
+    flex-shrink: 0;
+}
+
+.nw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    max-width: 100%;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid var(--nw-line);
+    border-radius: 2px;
+    background: #fff;
+    color: #33415c;
+    font-family: var(--nw-util);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.nw-chip:hover {
+    border-color: var(--nw-blue);
+    color: var(--nw-blue);
+}
+
+.nw-chip-count {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--nw-mute);
+    font-variant-numeric: tabular-nums;
+}
+
+.nw-chip.is-active {
+    background: var(--nw-blue);
+    border-color: var(--nw-blue);
+    color: #fff;
+}
+
+.nw-chip.is-active .nw-chip-count {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* Diana del logo: anillo azul con punto rojo, solo en el filtro activo */
+.nw-chip.is-active::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--nw-red);
+    box-shadow: 0 0 0 3px #fff;
+    margin-right: 0.15rem;
+}
+
+/* ---------- Cuerpo del listado ------------------------------------------ */
+
+/* Solo vertical: el atajo `padding` anularía el gutter lateral de .container */
+.nw-body {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.nw-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.nw-section-title {
+    font-family: var(--nw-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--nw-ink);
+    margin: 0;
+}
+
+.nw-section-count {
+    font-family: var(--nw-util);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+    white-space: nowrap;
+}
+
+.nw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+/* ---------- Tarjeta ------------------------------------------------------ */
+
+.nw-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--nw-card);
+    border: 1px solid var(--nw-line);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.nw-card:hover {
+    transform: translateY(-4px);
+    border-color: #c9d3e4;
+    box-shadow: 0 14px 28px rgba(7, 26, 63, 0.12);
+}
+
+.nw-card-figure {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: #e6ebf3;
+    aspect-ratio: 16 / 10;
+}
+
+.nw-card-figure img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.nw-card:hover .nw-card-figure img {
+    transform: scale(1.05);
+}
+
+/* Firma: el zócalo azul con filete rojo de la fachada de la tienda */
+.nw-card-figure::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 6px;
+    background: linear-gradient(to right, var(--nw-blue) 0 72%, var(--nw-red) 72% 100%);
+}
+
+.nw-card-cat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: var(--nw-blue);
+    color: #fff;
+    font-family: var(--nw-util);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.8rem;
+}
+
+.nw-card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.35rem 1.35rem 1.15rem;
+}
+
+.nw-card-date {
+    font-family: var(--nw-util);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+    margin-bottom: 0.6rem;
+}
+
+.nw-card-title {
+    font-family: var(--nw-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0.01em;
+    margin: 0 0 0.7rem;
+}
+
+.nw-card-title a {
+    color: var(--nw-ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--nw-red), var(--nw-red));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 2px;
+    transition: background-size 0.3s ease;
+}
+
+.nw-card:hover .nw-card-title a,
+.nw-card-title a:hover,
+.nw-card-title a:focus-visible {
+    background-size: 100% 2px;
+}
+
+.nw-card-excerpt {
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 1.1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.nw-card-foot {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--nw-line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.nw-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--nw-util);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nw-blue);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nw-more i {
+    transition: transform 0.25s ease;
+}
+
+.nw-card:hover .nw-more i,
+.nw-more:hover i {
+    transform: translateX(4px);
+}
+
+.nw-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: flex-end;
+}
+
+.nw-tag {
+    font-family: var(--nw-util);
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--nw-mute);
+    background: #eef1f7;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nw-tag:hover {
+    background: var(--nw-blue);
+    color: #fff;
+}
+
+/* ---------- Tarjeta destacada (portada, sin filtros) -------------------- */
+
+.nw-lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: stretch;
+}
+
+.nw-lead .nw-card-figure {
+    aspect-ratio: auto;
+    min-height: 340px;
+}
+
+.nw-lead .nw-card-body {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    justify-content: center;
+}
+
+.nw-lead .nw-card-title {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.nw-lead .nw-card-excerpt {
+    font-size: 1rem;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+.nw-lead-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--nw-util);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--nw-red);
+    margin-bottom: 0.8rem;
+}
+
+.nw-lead-flag::before {
+    content: '';
+    width: 26px;
+    height: 3px;
+    background: var(--nw-red);
+}
+
+/* ---------- Estado vacío ------------------------------------------------- */
+
+.nw-empty {
+    background: #fff;
+    border: 1px solid var(--nw-line);
+    border-radius: 4px;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
+    text-align: center;
+}
+
+.nw-empty h2 {
+    font-family: var(--nw-display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.6rem;
+}
+
+.nw-empty p {
+    color: var(--nw-mute);
+    margin: 0 0 1.6rem;
+}
+
+.nw-btn {
+    display: inline-block;
+    background: var(--nw-blue);
+    color: #fff;
+    font-family: var(--nw-util);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+}
+
+.nw-btn:hover {
+    background: var(--nw-blue-2);
+    color: #fff;
+}
+
+/* ---------- Paginación --------------------------------------------------- */
+
+.nw-pagination {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.nw .pagination {
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0;
+}
+
+.nw .page-link {
+    border: 1px solid var(--nw-line);
+    border-radius: 2px;
+    min-width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #33415c;
+    font-family: var(--nw-util);
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.nw .page-link:hover {
+    background: #eef1f7;
+    border-color: #c9d3e4;
+    color: var(--nw-blue);
+}
+
+.nw .page-item.active .page-link {
+    background: var(--nw-blue);
+    border-color: var(--nw-blue);
+    color: #fff;
+}
+
+.nw .page-item.disabled .page-link {
+    color: #aeb7c6;
+    background: #fff;
+}
+
+/* ---------- Accesibilidad ------------------------------------------------ */
+
+.nw a:focus-visible {
+    outline: 3px solid var(--nw-red);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nw *,
+    .nw *::before,
+    .nw *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .nw-card:hover {
+        transform: none;
+    }
+
+    .nw-card:hover .nw-card-figure img {
+        transform: none;
+    }
+}
+
+/* ---------- Responsive --------------------------------------------------- */
+
+@media (max-width: 992px) {
+    .nw-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .nw-hero-figure {
+        order: -1;
+        aspect-ratio: 2 / 1;
+    }
+
+    .nw-lead {
+        grid-template-columns: 1fr;
+    }
+
+    .nw-lead .nw-card-figure {
+        aspect-ratio: 16 / 9;
+        min-height: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .nw-hero {
+        padding-top: clamp(5.5rem, 22vw, 7rem);
+    }
+
+    .nw-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .nw-card-body {
+        padding: 0.8rem;
+    }
+
+    .nw-card-title {
+        font-size: 1.02rem;
+    }
+
+    .nw-card-excerpt,
+    .nw-tags {
+        display: none;
+    }
+
+    .nw-card-date {
+        font-size: 0.62rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .nw-card-cat {
+        font-size: 0.56rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .nw-card-foot {
+        padding-top: 0.6rem;
+    }
+
+    .nw-more {
+        font-size: 0.68rem;
+    }
+
+    /* La destacada conserva su extracto: es la portada de la sección */
+    .nw-lead {
+        grid-column: 1 / -1;
+    }
+
+    .nw-lead .nw-card-excerpt {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+
+    .nw-lead .nw-card-body {
+        padding: 1.1rem;
+    }
+
+    .nw-lead .nw-tags {
+        display: flex;
+    }
+}
+
+/* ==========================================================================
+   Noticia — detalle (/noticias/{slug})
+   Reutiliza hero, tarjetas y chips del listado; añade artículo y barra lateral.
+   ========================================================================== */
+
+.nw-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    font-family: var(--nw-util);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.nw-breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #8fb0e8;
+}
+
+.nw-breadcrumb li:not(:last-child)::after {
+    content: '';
+    width: 12px;
+    height: 1px;
+    background: rgba(143, 176, 232, 0.5);
+}
+
+.nw-breadcrumb a {
+    color: #8fb0e8;
+    text-decoration: none;
+}
+
+.nw-breadcrumb a:hover {
+    color: #fff;
+}
+
+.nw-breadcrumb [aria-current] {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* El titular de un artículo es más largo que "NOTICIAS": necesita otra escala */
+.nw-detail .nw-title {
+    font-size: clamp(2rem, 3.4vw, 3.1rem);
+    line-height: 1;
+}
+
+.nw-detail .nw-hero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+}
+
+.nw-detail .nw-hero-figure {
+    aspect-ratio: 16 / 10;
+}
+
+.nw-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-family: var(--nw-util);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c3d2ea;
+}
+
+.nw-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nw-meta i {
+    color: #8fb0e8;
+}
+
+/* ---------- Artículo + barra lateral ------------------------------------ */
+
+.nw-article-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+}
+
+.nw-article {
+    background: #fff;
+    border: 1px solid var(--nw-line);
+    border-radius: 4px;
+    padding: clamp(1.5rem, 4vw, 3.25rem);
+}
+
+.nw-article-lede {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    font-weight: 500;
+    color: #33415c;
+    margin: 0 0 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--nw-line);
+}
+
+.nw-article-body {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #33415c;
+}
+
+.nw-article-body > *:first-child {
+    margin-top: 0;
+}
+
+.nw-article-body p {
+    margin: 0 0 1.35rem;
+}
+
+.nw-article-body h2,
+.nw-article-body h3 {
+    font-family: var(--nw-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--nw-ink);
+    margin: 2.4rem 0 0.9rem;
+    line-height: 1.15;
+}
+
+.nw-article-body h2 {
+    font-size: 1.85rem;
+}
+
+.nw-article-body h3 {
+    font-size: 1.5rem;
+}
+
+.nw-article-body strong {
+    color: var(--nw-ink);
+    font-weight: 600;
+}
+
+.nw-article-body a {
+    color: var(--nw-blue);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.nw-article-body ul,
+.nw-article-body ol {
+    margin: 0 0 1.35rem;
+    padding-left: 1.15rem;
+}
+
+.nw-article-body li {
+    margin-bottom: 0.55rem;
+}
+
+.nw-article-body ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.nw-article-body ul li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+/* La diana del logo hace de viñeta */
+.nw-article-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--nw-blue);
+}
+
+.nw-article-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+}
+
+.nw-article-body blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem 1.75rem;
+    background: #f4f6fb;
+    border-left: 4px solid var(--nw-blue);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--nw-ink);
+}
+
+.nw-article-body blockquote p {
+    margin: 0;
+}
+
+.nw-article-body blockquote cite {
+    display: block;
+    margin-top: 0.9rem;
+    font-family: var(--nw-util);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+}
+
+/* ---------- Etiquetas y compartir --------------------------------------- */
+
+.nw-article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--nw-line);
+}
+
+.nw-article-tags .nw-tags-label {
+    font-family: var(--nw-util);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+    margin-right: 0.35rem;
+}
+
+.nw-article-tags .nw-tag {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.7rem;
+}
+
+.nw-share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--nw-line);
+}
+
+.nw-share-label {
+    font-family: var(--nw-util);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nw-ink);
+}
+
+.nw-share-list {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Neutros en reposo; el color de la plataforma aparece solo al interactuar */
+.nw-share-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--nw-line);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a5568;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.nw-share-btn:hover,
+.nw-share-btn:focus-visible {
+    color: #fff;
+    border-color: transparent;
+}
+
+.nw-share-facebook:hover, .nw-share-facebook:focus-visible { background: #1877f2; }
+.nw-share-instagram:hover, .nw-share-instagram:focus-visible {
+    background: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+}
+.nw-share-whatsapp:hover, .nw-share-whatsapp:focus-visible { background: #25d366; }
+.nw-share-email:hover, .nw-share-email:focus-visible { background: var(--nw-blue); }
+
+/* ---------- Barra lateral ------------------------------------------------ */
+
+.nw-aside {
+    position: sticky;
+    top: 6.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.nw-aside-block {
+    background: #fff;
+    border: 1px solid var(--nw-line);
+    border-radius: 4px;
+    padding: 1.5rem;
+}
+
+.nw-aside-title {
+    font-family: var(--nw-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--nw-ink);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--nw-line);
+    position: relative;
+}
+
+.nw-aside-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 56px;
+    height: 3px;
+    background: linear-gradient(to right, var(--nw-blue) 0 62%, var(--nw-red) 62% 100%);
+}
+
+/* Lista de más recientes */
+.nw-recent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nw-recent-item {
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: start;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nw-recent-thumb {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #e6ebf3;
+}
+
+.nw-recent-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.nw-recent-item:hover .nw-recent-thumb img {
+    transform: scale(1.07);
+}
+
+.nw-recent-info {
+    display: block;
+}
+
+.nw-recent-title {
+    display: block;
+    font-family: var(--nw-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--nw-ink);
+    margin: 0 0 0.3rem;
+    transition: color 0.2s ease;
+}
+
+.nw-recent-item:hover .nw-recent-title {
+    color: var(--nw-blue);
+}
+
+.nw-recent-date {
+    display: block;
+    font-family: var(--nw-util);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nw-mute);
+}
+
+/* ---------- Noticias relacionadas ---------------------------------------- */
+
+.nw-related {
+    background: #e9edf4;
+    border-top: 1px solid var(--nw-line);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.nw-related .nw-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.nw-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--nw-util);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nw-blue);
+    text-decoration: none;
+}
+
+.nw-back i {
+    transition: transform 0.25s ease;
+}
+
+.nw-back:hover i {
+    transform: translateX(-4px);
+}
+
+/* ---------- Responsive del detalle --------------------------------------- */
+
+@media (max-width: 992px) {
+    /* Misma especificidad que .nw-detail .nw-hero-inner, o no colapsa a una columna */
+    .nw-detail .nw-hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .nw-detail .nw-hero-figure {
+        aspect-ratio: 16 / 9;
+    }
+
+    .nw-article-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .nw-aside {
+        position: static;
+    }
+}
+
+@media (max-width: 576px) {
+    .nw-related .nw-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* En relacionadas hay pocas tarjetas: el extracto sí aporta */
+    .nw-related .nw-card-excerpt {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+
+    .nw-related .nw-card-body {
+        padding: 1.1rem;
+    }
+
+    .nw-related .nw-card-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* ---------- Banda de noticias en la portada ------------------------------ */
+/* Se usa en page/index.blade.php. Reutiliza .nw-grid y la tarjeta .nw-card;
+   solo cambia el campo: navy en vez de papel, para que corte la portada. */
+
+.nw.nw-band {
+    background: var(--nw-navy);
+    padding: clamp(3rem, 6vw, 4.75rem) 0;
+}
+
+.nw-band-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.nw-band-title {
+    font-family: var(--nw-display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+}
+
+.nw-band-head .nw-rule {
+    margin: 0.9rem 0 0;
+}
+
+.nw-band-lede {
+    max-width: 34ch;
+    margin: 0.9rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #c3d0e6;
+}
+
+/* Enlace a la sección completa: hereda el trazo del hero, en versión clara */
+.nw-band-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    font-family: var(--nw-util);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.nw-band-all:hover,
+.nw-band-all:focus-visible {
+    background: var(--nw-red);
+    border-color: var(--nw-red);
+    color: #fff;
+}
+
+.nw-band-all i {
+    transition: transform 0.25s ease;
+}
+
+.nw-band-all:hover i {
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .nw-band-head {
+        align-items: flex-start;
+    }
+
+    .nw-band-all {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Siempre son tres noticias: rejilla fija, nunca auto-fill (dejaría huecos).
+   Tres en escritorio, dos a partir de tablet. Nunca baja a una columna. */
+.nw-band .nw-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    .nw-band .nw-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

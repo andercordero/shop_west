@@ -91,6 +91,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         /**
+         * Estados y aliados comerciales (mapa de la portada)
+         */
+        $this->call([
+            StateSeeder::class,
+            CommercialPartnerSeeder::class,
+        ]);
+
+        /**
          * Products
          */
         Product::create([

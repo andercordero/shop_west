@@ -181,6 +181,7 @@
     <div class="mobile_navbar--container">
       <ul>
         <li><a href="{{ route('about') }}" class="underline">Nosotros</a></li>
+        <li><a href="{{ route('news.index') }}" class="underline">Noticias</a></li>
         <li><a href="{{ route('contact') }}" class="underline">Contacto</a></li>
         <li><a href="{{ route('project') }}" class="underline">Proyectos</a></li>
         @foreach ($categories as $category)

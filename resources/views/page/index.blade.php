@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="{{ asset('css/glide.core.min.css') }}">
   <!-- Optional Theme Stylesheet -->
   <link rel="stylesheet" href="{{ asset('css/glide.theme.min.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/news.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/projects-home.css') }}">
   <style>
     #carrousel_top {
       margin-top: 7rem;
@@ -191,64 +198,24 @@
     </header>
     <article class="container-categories">
       @foreach ($categories as $cat)
-      <div class="category">
-        <a href="{{ route('products_by_category', $cat) }}"
-          style="display: flex; align-items: center; justify-content: center;"
-          aria-label="Categoría {{ $cat->name }}">
-        </a>
-        <p>
-          <a href="{{ route('products_by_category', $cat) }}">Linea de {{ $cat->name }}</a>
-        </p>
-      </div>
+        <div class="category">
+          <a href="{{ route('products_by_category', $cat) }}"
+            style="display: flex; align-items: center; justify-content: center;"
+            aria-label="Categoría {{ $cat->name }}">
+          </a>
+          <p>
+            <a href="{{ route('products_by_category', $cat) }}">Linea de {{ $cat->name }}</a>
+          </p>
+        </div>
       @endforeach
     </article>
   </section>
 
-  <section class="projects">
-    <header>
-      <h2 class="h2"><i class="fa-solid fa-quote-left quotes"></i>Proyectos<i
-          class="fa-solid fa-quote-right quotes"></i></h2>
-    </header>
-    <div class="container">
-      <div class="glide" style="position: relative" id="space2">
+  @include('page.partials.projects')
 
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-            <li class="glide__slide">
-              <img src="{{ asset('images/projects/lidotel.png') }}" alt=""
-                style="width: 100%; height: 300px;">
-            </li>
-            <li class="glide__slide">
-              <img src="{{ asset('images/projects/catedral.jpg') }}" alt=""
-                style="width: 100%; height: 300px;">
-            </li>
-            <li class="glide__slide">
-              <img src="{{ asset('images/projects/proyecto_esmeralda.jpeg') }}" alt=""
-                style="width: 100%; height: 300px;">
-            </li>
-            <li class="glide__slide">
-              <img src="{{ asset('images/projects/parque_la_musica.png') }}" alt=""
-                style="width: 100%; height: 300px;">
-            </li>
-            <li class="glide__slide">
-              <img src="{{ asset('images/projects/biotel.jpg') }}" alt=""
-                style="width: 100%; height: 300px;">
-            </li>
-          </ul>
-        </div>
+  @include('page.partials.aliados')
 
-        <div class="glide" style="position: initial" id="space2">
-
-          <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<" aria-label="Arrow Left"><i
-                class="fa-solid fa-angle-left"></i></button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">" aria-label="Arrow Right"><i
-                class="fa-solid fa-angle-right"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  @include('news.partials.band', ['items' => $latestNews])
 
   <div class="" style="margin: 20px">
     <header>
@@ -340,6 +307,7 @@
 <script src="{{ asset('js/glide.min.js') }}"></script>
 {{-- <script src="{{ asset('js/audio_play.js') }}"></script> --}}
 <script src="{{ asset('js/display_whatsapp.js') }}"></script>
+<script src="{{ asset('js/partners.js') }}"></script>
 
 <script>
   const config_carrousel_top = {
@@ -354,19 +322,7 @@
   };
   new Glide('#space1', config1).mount()
 
-  const config2 = {
-    type: 'carousel',
-    perView: 3,
-    breakpoints: {
-      1024: {
-        perView: 2
-      },
-      600: {
-        perView: 1
-      }
-    }
-  };
-  new Glide('#space2', config2).mount()
+  {{-- #space2 era el carrusel de proyectos; ahora es un mosaico sin JS --}}
 
   const config3 = {
     startAt: 1,

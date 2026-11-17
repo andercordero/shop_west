@@ -14,6 +14,7 @@ class State extends Model
         'code',
         'description',
         'image',
+        'active',
     ];
 
     public function commercialPartners()

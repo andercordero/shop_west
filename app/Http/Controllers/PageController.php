@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\News;
+use App\Models\State;
 use App\Models\Product;
 use App\Models\ProductRating;
 use App\Models\Subcategory;
@@ -22,10 +24,25 @@ class PageController extends Controller
 
         $cart = new CartController();
 
+        // Estados con aliados comerciales activos, para el mapa de la portada
+        $partnerStates = State::where('active', true)
+            ->whereHas('commercialPartners', fn ($q) => $q->where('active', true))
+            ->with(['commercialPartners' => fn ($q) => $q->where('active', true)->orderBy('name')])
+            ->orderBy('name')
+            ->get();
+
+        $latestNews = News::published()
+            ->with(['category', 'tags'])
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('page.index', [
             'products' => Product::take(5)->get(),
             'categories' => $categories,
             'cart_products' => $cart->show_products(),
+            'latestNews' => $latestNews,
+            'partnerStates' => $partnerStates,
             'metaData' => $metaData,
         ]);
     }
